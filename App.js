@@ -1,20 +1,18 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import Navigation from "./src/screens/Navigation";
+import favouriteReducer from './redux/reducers/FavouriteReducer';
+import ToastManager from 'toastify-react-native'
+
+const store = createStore(favouriteReducer);
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    return(
+        <Provider store={store}>
+            <ToastManager />
+            <Navigation/>
+        </Provider>
+    )
+}
